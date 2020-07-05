@@ -73,17 +73,105 @@ Los datos de emisiones se han extraido de <a href="https://www.climatewatchdata.
 Estos datos no se encontraban ni con la calidad, ni con el formato, ni con la estructura de tablas adecuadas como para usarlos en los directamente en gráficos. Se han tendido que cambiar nombres de países, eliminar en algunos casos países muy pequeños de poca relevancia por la falta de suficientes datos y en otros pocos casos completar datos usando el promedio de los valores de los años anteriores. También se han encontrado errores de signo en el caso del fichero que contiene las emisiones. En los ficheros fuente cada año corresponde a una columna, luego se han tenido que modificar las tablas de manera que el año pasase a ser un atributo de la columna "año". Debido a la calidad de los datos el periodo que finalmente se ha seleccionado va desde el año 1995 hasta el 2016. Toda la limpieza y preparación de los datos ha sido hecha en Python.  Para despreciar efectos inflacionarios y de tipos de cambio se han calculado los PIB reales. Para ello se ha cogido como año de referencia el PIB nominal en dólares para cada país, calculándose los siguientes usando el porcentaje de variación del PIB a precios constantes. Se puede encontrar el código en el siguiente cuaderno de Google Colab <a href="https://colab.research.google.com/drive/1BTDgaquG-JBoKaSZEERXFxowvPtZd1Y3?usp=sharing">Seminario_Visualizacion.ipynb </a>. Los ficheros iniciales eran <a href="https://drive.google.com/file/d/19QkgCSXAtkKqIejArFG72G2e_7UR3bER/view?usp=sharing"> 'Datos_economicos.csv' </a> y <a href="https://drive.google.com/file/d/1893GbpS-tzB37KxSRZzznwGAgXIyURl9/view?usp=sharing">Emisiones_origen.csv </a>. Una vez procesados los ficheros resultantes son  <a href="https://drive.google.com/file/d/1-1P9FI53iuD3x8q9Mi40zAKR9sfAlH4v/view?usp=sharing"> 'Datos_economicos_arreglados_columnas.csv' </a> y <a href="https://drive.google.com/file/d/1vf9ynkr5oywnXvni4EBDATZPWctjT2E7/view?usp=sharing">'Datos_emisiones_arreglados_columnas.csv'</a>
 
 </span></p>
-
+<br>
 <p class=MsoNormal style='text-align:justify;line-height:140%'><span lang=ES
 style='font-family:"Times New Roman",serif'> &nbsp;&nbsp;&nbsp;&nbsp;
 
 Los países se han agrupado en regiones económico-geográficas. Si un país tiene un interés especial, debido a sus emisiones y/o PIB,  se le asignado una región que solo lo contiene él, adoptando la región  el nombre del país. Por ejemplo esto sucede con EE.UU o China. Se pueden ver las regiones en la tabla siguiente. AÑADIR
 
+<table class=MsoNormalTable border=0 cellspacing=0 text-align: center;cellpadding=0 
+ style='width:160.0pt;border-collapse:collapse'>
+ <tr style='height:15.5pt'>
+  <td width=250 nowrap valign=bottom style='width:112.0pt;border:solid windowtext 1.0pt;
+  padding:0cm 3.5pt 0cm 3.5pt;height:14.5pt' align="center" >
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><span style='color:black'><b>Región</b></span></p>
+  </td>
+ </tr>
+ <tr style='height:14.5pt'>
+  <td width=149 nowrap valign=bottom style='width:112.0pt; border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 3.5pt 0cm 3.5pt;height:14.5pt' align="center" >
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><span style='color:black'>África</span></p>
+  </td>
+ </tr> 
+ <tr style='height:14.5pt'>
+  <td width=149 nowrap valign=bottom style='width:112.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 3.5pt 0cm 3.5pt;height:14.5pt' align="center" >
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><span style='color:black'>América (sin EEUU)</span></p>
+  </td>
+ </tr>
+ <tr style='height:14.5pt'>
+  <td width=149 nowrap valign=bottom style='width:112.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 3.5pt 0cm 3.5pt;height:14.5pt'align="center" >
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><span style='color:black'>Asia (sin China ni India)</span></p>
+  </td>
+ </tr>
+ <tr style='height:14.5pt'>
+  <td width=149 nowrap valign=bottom style='width:112.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 3.5pt 0cm 3.5pt;height:14.5pt'align="center" >
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><span style='color:black'>China</span></p>
+  </td>
+ </tr>
+ <tr style='height:14.5pt'>
+  <td width=149 nowrap valign=bottom style='width:112.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 3.5pt 0cm 3.5pt;height:14.5pt'align="center" >
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><span style='color:black'>EEUU</span></p>
+  </td>
+ </tr>
+ <tr style='height:14.5pt'>
+  <td width=149 nowrap valign=bottom style='width:112.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 3.5pt 0cm 3.5pt;height:14.5pt'align="center" >
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><span style='color:black'>India</span></p>
+  </td>
+ </tr>
+ <tr style='height:14.5pt'>
+  <td width=149 nowrap valign=bottom style='width:112.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 3.5pt 0cm 3.5pt;height:14.5pt'align="center" >
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><span style='color:black'>Unión Europea</span></p>
+  </td>
+ </tr>
+ <tr style='height:14.5pt'>
+  <td width=149 nowrap valign=bottom style='width:112.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 3.5pt 0cm 3.5pt;height:14.5pt'align="center" >
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><span style='color:black'>Japón</span></p>
+  </td>
+ </tr>
+ <tr style='height:14.5pt'>
+  <td width=149 nowrap valign=bottom style='width:112.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 3.5pt 0cm 3.5pt;height:14.5pt'align="center" >
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><span style='color:black'>Rusia</span></p>
+  </td>
+ </tr>
+ <tr style='height:14.5pt'>
+  <td width=149 nowrap valign=bottom style='width:112.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 3.5pt 0cm 3.5pt;height:14.5pt'align="center" >
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><span style='color:black'>Reino Unido</span></p>
+  </td>
+ </tr>
+ <tr style='height:14.5pt'>
+  <td width=149 nowrap valign=bottom style='width:112.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 3.5pt 0cm 3.5pt;height:14.5pt'align="center" >
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><span style='color:black'>Resto</span></p>
+  </td>
+ </tr>
+</table>
+
 </span></p>
 
 <p class=MsoNormal style='text-align:justify;line-height:140%'><span lang=ES
 style='font-family:"Times New Roman",serif'> &nbsp;&nbsp;&nbsp;&nbsp;
-La descripción <b>Otros</b> incluye Oceanía y los países de la Europa continental que no pertenecen a la Unión Europea.
+La descripción <b>Resto</b> incluye Oceanía y los países de la Europa continental que no pertenecen a la Unión Europea.
 Para crear las visualizaciones se ha usado Python y Tableau. En el caso de los gráficos generados con Phyton se puede encontrar el código de los mismos en el cuaderno de Google Colab indicado anteriormente.
 
 </span></p>
